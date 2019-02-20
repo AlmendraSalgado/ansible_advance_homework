@@ -1,7 +1,17 @@
+- hosts: localhost
+  vars:
+    OSP_GUID: 5bd4
+
+  tasks:
+  - name: Create workstation inventory
+    add_host:
+       name: "workstation-{{ OSP_GUID }}.rhpds.opentlc.com"
+       group: workstation
+
 - hosts: workstation
   become: yes
   vars_files:
-    - secret_osp_password.yml
+    - vars/three-tier-app/instances.yml
 
   roles:
     - osp-servers

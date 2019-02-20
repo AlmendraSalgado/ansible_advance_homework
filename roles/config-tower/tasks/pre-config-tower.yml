@@ -10,11 +10,15 @@
 
 - name: Copy opentlc ssh keys
   copy:
-    src: "{{path_to_opentlc_key}}"
+    src: "{{ path_to_opentlc_key }}"
     dest: /root/secret.pem
-
 
 - name: Copy inventory vars
   copy:
     src: inventory_vars.json
     dest: /root/inventory_vars.json
+
+- name: Generate tower_cli.cfg to connect with Tower
+  template:
+    src: tower_cli.cfg.j2
+    dest: "{{ config_file }}"

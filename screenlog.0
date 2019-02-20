@@ -1,0 +1,127 @@
+kroot@bastion:~/ansible_advance_homework\[root@bastion ansible_advance_homework]# OSP_5bd4
+bash: OSP_5bd4: no se encontró la orden
+kroot@bastion:~/ansible_advance_homework\[root@bastion ansible_advance_homework]# OSP_5bd4G5bd4U5bd4I5bd4D5bd4?5bd4[1P5bd4=5bd4
+kroot@bastion:~/ansible_advance_homework\[root@bastion ansible_advance_homework]# ansible-playbook site-setup-workstation.yml -e
+Usage: ansible-playbook [options] playbook.yml [playbook2 ...]
+
+ansible-playbook: error: -e option requires an argument
+kroot@bastion:~/ansible_advance_homework\[root@bastion ansible_advance_homework]# OSP_GUID=${OSP_GUID} --private-key=/root/.ssh/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cansible-playbook site-setup-workstation.yml -e OSP_GUID=5bd4 --p rivate-key=/root/.ssh/prv_key.pem -u asalgado-redhta.[K[K[K[Khat.com
+
+PLAY [localhost] ****************************************************************************************
+
+TASK [Gathering Facts] **********************************************************************************
+[0;32mok: [localhost][0m
+
+TASK [Create workstation inventory] *********************************************************************
+[0;33mchanged: [localhost][0m
+
+PLAY [workstation] **************************************************************************************
+
+TASK [Gathering Facts] **********************************************************************************
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : include_tasks] ****************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/setup-workstation/tasks/pre-tasks.yml for workstation-5bd4.rhpds.opentlc.com[0m
+
+TASK [setup-workstation : Setup Yum repos] **************************************************************
+[0;33mchanged: [workstation-5bd4.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : yum clean] ********************************************************************
+[1;35m [WARNING]: Consider using the yum module rather than running yum.  If you need to use command because[0m
+[1;35myum is insufficient you can add warn=False to this command task or set command_warnings=False in[0m
+[1;35mansible.cfg to get rid of this message.[0m
+[1;35m[0m
+[0;33mchanged: [workstation-5bd4.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Install EPEL repos] ***********************************************************
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : install pip] ******************************************************************
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Install openstacksdk library] *************************************************
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Create clouds.yaml file] ******************************************************
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Set openstack.pub authorized key from file] ***********************************
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : include_tasks] ****************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/setup-workstation/tasks/create-flavor.yml for workstation-5bd4.rhpds.opentlc.com[0m
+
+TASK [setup-workstation : Create m2.small flavor] *******************************************************
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : include_tasks] ****************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/setup-workstation/tasks/create-keypair.yml for workstation-5bd4.rhpds.opentlc.com[0m
+
+TASK [setup-workstation : Generate key files] ***********************************************************
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Create OSP keypair] ***********************************************************
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : include_tasks] ****************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/setup-workstation/tasks/create-sg.yml for workstation-5bd4.rhpds.opentlc.com[0m
+
+TASK [setup-workstation : Create Security Group Apps] ***************************************************
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Create Security Group Rule Apps] **********************************************
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com] => (item={u'ip_prefix': u'0.0.0.0/0', u'port': u'8080'})[0m
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com] => (item={u'ip_prefix': u'0.0.0.0/0', u'port': u'22'})[0m
+
+TASK [setup-workstation : Create Security Group Frontend] ***********************************************
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Create Security Group Rule Frontend] ******************************************
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com] => (item={u'ip_prefix': u'0.0.0.0/0', u'port': u'80'})[0m
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com] => (item={u'ip_prefix': u'0.0.0.0/0', u'port': u'443'})[0m
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com] => (item={u'ip_prefix': u'0.0.0.0/0', u'port': u'22'})[0m
+
+TASK [setup-workstation : Create Security Group DB] *****************************************************
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Create Security Group Rule DB] ************************************************
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com] => (item={u'ip_prefix': u'20.20.20.0/24', u'port': u'5432'})[0m
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com] => (item={u'ip_prefix': u'0.0.0.0/0', u'port': u'22'})[0m
+
+TASK [setup-workstation : include_tasks] ****************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/setup-workstation/tasks/create-image.yml for workstation-5bd4.rhpds.opentlc.com[0m
+
+TASK [setup-workstation : Download RHEL image] **********************************************************
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Create openstack image] *******************************************************
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : include_tasks] ****************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/setup-workstation/tasks/create-network.yml for workstation-5bd4.rhpds.opentlc.com[0m
+
+TASK [setup-workstation : Configuration of Public and Private Networks] *********************************
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com] => (item={'value': {u'cloud_name': u'ospcloud', u'state': u'present', u'subnet_name': u'int_subnet', u'external': False, u'cidr_network': u'20.20.20.0/24', u'network_name': u'int_network'}, 'key': u'internal'})[0m
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com] => (item={'value': {u'cloud_name': u'ospcloud', u'state': u'present', u'subnet_name': u'ext_subnet', u'external': True, u'cidr_network': u'10.10.10.0/24', u'network_name': u'ext_network'}, 'key': u'external'})[0m
+
+TASK [setup-workstation : Configuration of Subnets for Public and Private SubNets] **********************
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com] => (item={'value': {u'cloud_name': u'ospcloud', u'state': u'present', u'subnet_name': u'int_subnet', u'external': False, u'cidr_network': u'20.20.20.0/24', u'network_name': u'int_network'}, 'key': u'internal'})[0m
+[0;32mok: [workstation-5bd4.rhpds.opentlc.com] => (item={'value': {u'cloud_name': u'ospcloud', u'state': u'present', u'subnet_name': u'ext_subnet', u'external': True, u'cidr_network': u'10.10.10.0/24', u'network_name': u'ext_network'}, 'key': u'external'})[0m
+
+TASK [setup-workstation : Create Router] ****************************************************************
+[0;33mchanged: [workstation-5bd4.rhpds.opentlc.com] => (item={'value': {u'cloud_name': u'ospcloud', u'state': u'present', u'name': u'router', u'network': u'ext_network'}, 'key': u'router'})[0m
+
+PLAY [localhost] ****************************************************************************************
+
+TASK [Append inventory file] ****************************************************************************
+[0;32mok: [localhost][0m
+
+TASK [Run Ansible Tower setup] **************************************************************************
+[0;33mchanged: [localhost][0m
+
+PLAY RECAP **********************************************************************************************
+[0;33mlocalhost[0m                  : [0;32mok=4   [0m [0;33mchanged=2   [0m unreachable=0    failed=0   
+[0;33mworkstation-5bd4.rhpds.opentlc.com[0m : [0;32mok=28  [0m [0;33mchanged=3   [0m unreachable=0    failed=0   
+
+kroot@bastion:~/ansible_advance_homework\[root@bastion ansible_advance_homework]# exit
+exit

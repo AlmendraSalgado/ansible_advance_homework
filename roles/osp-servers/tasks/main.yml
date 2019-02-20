@@ -3,17 +3,13 @@
 - name: Create new server instances and attaches them a network and passes metadata to the instance
   os_server:
     state: present
-    auth:
-      auth_url: https://identity.example.com
-      username: admin
-      password: "{{ osp_admin_password }}"
-      project_name: admin
-    name: "{{ item.name }}"
-    image: "{{ item.image }}"
-    key_name: "{{ item.key_name }}"
-    flavor: "{{ item.flavor }}"
-    security_groups: "{{ item.security_group }}"
-    meta: "{{ item.meta }}"
+    cloud: "ospcloud"
+    name: "{{ item.value.name }}"
+    image: "{{ item.value.image }}"
+    key_name: "{{ item.value.key_name }}"
+    flavor: "{{ item.value.flavor }}"
+    security_groups: "{{ item.value.security_group }}"
+    meta: "{{ item.value.meta }}"
     nics:
       - net-name: int_network
     userdata: |
@@ -22,8 +18,8 @@
       cat /tmp/openstack.pub >> /home/cloud-user/.ssh/authorized_keys
       curl -o /tmp/internal.repo http://www.opentlc.com/download/ansible_bootcamp/repo/internal.repo
       cp /tmp/internal.repo /etc/yum.repos.d/internal.repo
-    register: instanceip
-    loop: "{{ osp_servers }}"
+  register: instanceip
+  loop: "{{ osp_servers | dict2items }}"
 
 - debug:
     msg: "{{ item.openstack.interface_ip }}"
@@ -31,19 +27,15 @@
 
 - name: Add floating IP to Servers
   os_floating_ip:
-    auth:
-      auth_url: https://identity.example.com
-      username: admin
-      password: "{{ osp_admin_password }}"
-      project_name: admin
     state: present
+    cloud: "ospcloud"
     reuse: yes
-    server: "{{ item.name }}"
+    server: "{{ item.value.name }}"
     network: ext_network
     wait: true
     timeout: 1800
   register: instancefloatingip
-  loop: "{{ osp_instances }}"
+  loop: "{{ osp_servers | dict2items }}"
 
 - name: Show public IP
   debug:

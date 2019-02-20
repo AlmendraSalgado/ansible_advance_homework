@@ -1,5 +1,6 @@
 ---
 # vars file for roles/config-tower
+config_file: ~/.tower_cli.cfg
 org_name: Default 
 scm_branch: master 
 scm_url: "{{ github_repo }}"
