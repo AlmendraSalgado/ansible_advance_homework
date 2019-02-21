@@ -1,5 +1,5 @@
 ---
 # defaults file for lb-tier
 HAPROXY_PACKAGES:
-  - httpie
+#  - httpie
   - haproxy
