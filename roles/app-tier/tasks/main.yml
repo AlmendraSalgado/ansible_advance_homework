@@ -1,2 +1,70 @@
 ---
 # tasks file for app-tier
+- name: Install required packages
+  yum:
+    name: "{{ TOMCAT_PACKAGES }}"
+    state: latest
+  tags:
+    - tomcat
+    - apps
+
+- name: Create ansible tomcat ROOT directory
+  file:
+    path: /usr/share/tomcat/webapps/ROOT
+    state: directory
+  tags:
+    - tomcat
+    - apps
+
+- name: Copy index.html file to tomcat ansible directory
+  template:
+    src: index.html.j2
+    dest: /usr/share/tomcat/webapps/ROOT/index.html
+    mode: 0644
+  tags:
+    - tomcat
+    - apps
+
+- name: Start and enable tomcat service
+  service:
+    name: tomcat
+    state: started
+    enabled: true 
+  tags:
+    - tomcat
+    - apps
+
+############## IS IT REALLY NECCESARY? ###############
+
+- name: Create second ansible tomcat directory
+  file:
+    path: /usr/share/tomcat/webapps/ansible
+    state: directory
+  tags:
+    - tomcat
+    - apps
+
+- name: Add customized index.html to second ansible tomcat directory
+  template:
+    src: index.html.{{ ansible_hostname }}
+    dest: /usr/share/tomcat/webapps/ansible/index.html 
+  tags:
+    - tomcat
+    - apps
+
+- name: Install required packages
+  yum:
+    name: "{{ APACHE_PACKAGES }}"
+    state: latest
+  tags:
+    - apache
+    - apps
+
+- name: Start and enable Apache service
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+  tags:
+    - apache
+    - apps

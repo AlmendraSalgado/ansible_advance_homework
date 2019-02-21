@@ -1,2 +1,6 @@
 ---
 # defaults file for app-tier
+TOMCAT_PACKAGES:
+  - tomcat
+APACHE_PACKAGES:
+  - httpd
