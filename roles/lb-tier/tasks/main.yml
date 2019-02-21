@@ -1,12 +1,5 @@
 ---
 # tasks file for lb-tier
-- name: Get facts
-  setup:
-  register: facts
-  
-- debug:
-    msg: "{{ facts }}"
-
 - name: Install the required packages
   yum:
     name: "{{ HAPROXY_PACKAGES }}"
