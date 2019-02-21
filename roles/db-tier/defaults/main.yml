@@ -1,2 +1,4 @@
 ---
 # defaults file for db-tier
+POSTGRESQL_PACKAGES:
+  - postgresql-server
