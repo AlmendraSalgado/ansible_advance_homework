@@ -10,7 +10,7 @@
 
 - debug:
     msg: "{{ item }}"
-  with_items: "{{ group['apps'] }}"
+  with_items: groups.apps
 
 - name: Configure HAproxy using configuration file
   template:
