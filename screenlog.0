@@ -1,0 +1,718 @@
+kroot@bastion:~/ansible_advance_homework\[root@bastion ansible_advance_homework]# ansible-playbook -[Ksite-setup-workstation.yml -e OSP_GUID=${}O}S}P}_}G} M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CU}}I}D}[C --private-key=/root/.ssh/mykey.pem -u asalgado-redhat.com
+
+PLAY [localhost] ****************************************************************************************
+
+TASK [Gathering Facts] **********************************************************************************
+[0;32mok: [localhost][0m
+
+TASK [Create workstation inventory] *********************************************************************
+[0;33mchanged: [localhost][0m
+
+PLAY [workstation] **************************************************************************************
+
+TASK [Gathering Facts] **********************************************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : include_tasks] ****************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/setup-workstation/tasks/pre-tasks.yml for workstation-509b.rhpds.opentlc.com[0m
+
+TASK [setup-workstation : Setup Yum repos] **************************************************************
+[0;33mchanged: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : yum clean] ********************************************************************
+[1;35m [WARNING]: Consider using the yum module rather than running yum.  If you need to use command because[0m
+[1;35myum is insufficient you can add warn=False to this command task or set command_warnings=False in[0m
+[1;35mansible.cfg to get rid of this message.[0m
+[1;35m[0m
+[0;33mchanged: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Install EPEL repos] ***********************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : install pip] ******************************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Install openstacksdk library] *************************************************
+[0;33mchanged: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Create clouds.yaml file] ******************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Set openstack.pub authorized key from file] ***********************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : include_tasks] ****************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/setup-workstation/tasks/create-flavor.yml for workstation-509b.rhpds.opentlc.com[0m
+
+TASK [setup-workstation : Create m2.small flavor] *******************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : include_tasks] ****************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/setup-workstation/tasks/create-keypair.yml for workstation-509b.rhpds.opentlc.com[0m
+
+TASK [setup-workstation : Generate key files] ***********************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Create OSP keypair] ***********************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : include_tasks] ****************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/setup-workstation/tasks/create-sg.yml for workstation-509b.rhpds.opentlc.com[0m
+
+TASK [setup-workstation : Create Security Group Apps] ***************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Create Security Group Rule Apps] **********************************************
+^[[A^[[A[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={u'ip_prefix': u'0.0.0.0/0', u'port': u'8080'})[0m
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={u'ip_prefix': u'0.0.0.0/0', u'port': u'22'})[0m
+
+TASK [setup-workstation : Create Security Group Frontend] ***********************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Create Security Group Rule Frontend] ******************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={u'ip_prefix': u'0.0.0.0/0', u'port': u'80'})[0m
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={u'ip_prefix': u'0.0.0.0/0', u'port': u'443'})[0m
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={u'ip_prefix': u'0.0.0.0/0', u'port': u'22'})[0m
+
+TASK [setup-workstation : Create Security Group DB] *****************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Create Security Group Rule DB] ************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={u'ip_prefix': u'20.20.20.0/24', u'port': u'5432'})[0m
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={u'ip_prefix': u'0.0.0.0/0', u'port': u'22'})[0m
+
+TASK [setup-workstation : include_tasks] ****************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/setup-workstation/tasks/create-image.yml for workstation-509b.rhpds.opentlc.com[0m
+
+TASK [setup-workstation : Download RHEL image] **********************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Create openstack image] *******************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : include_tasks] ****************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/setup-workstation/tasks/create-network.yml for workstation-509b.rhpds.opentlc.com[0m
+
+TASK [setup-workstation : Configuration of Public and Private Networks] *********************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={'value': {u'cloud_name': u'ospcloud', u'state': u'present', u'subnet_name': u'int_subnet', u'external': False, u'cidr_network': u'20.20.20.0/24', u'network_name': u'int_network'}, 'key': u'internal'})[0m
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={'value': {u'cloud_name': u'ospcloud', u'state': u'present', u'subnet_name': u'ext_subnet', u'external': True, u'cidr_network': u'10.10.10.0/24', u'network_name': u'ext_network'}, 'key': u'external'})[0m
+
+TASK [setup-workstation : Configuration of Subnets for Public and Private SubNets] **********************
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={'value': {u'cloud_name': u'ospcloud', u'state': u'present', u'subnet_name': u'int_subnet', u'external': False, u'cidr_network': u'20.20.20.0/24', u'network_name': u'int_network'}, 'key': u'internal'})[0m
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={'value': {u'cloud_name': u'ospcloud', u'state': u'present', u'subnet_name': u'ext_subnet', u'external': True, u'cidr_network': u'10.10.10.0/24', u'network_name': u'ext_network'}, 'key': u'external'})[0m
+
+TASK [setup-workstation : Create Router] ****************************************************************
+[0;31mfailed: [workstation-509b.rhpds.opentlc.com] (item={'value': {u'cloud_name': u'ospcloud', u'state': u'present', u'name': u'router', u'network': u'ext_network'}, 'key': u'router'}) => {"changed": false, "item": {"key": "router", "value": {"cloud_name": "ospcloud", "name": "router", "network": "ext_network", "state": "present"}}, "msg": "Error detaching interface from router d286e246-6eea-450b-8eb8-60e2f9f3f873: Client Error for url: http://192.168.0.20:9696/v2.0/routers/d286e246-6eea-450b-8eb8-60e2f9f3f873/remove_router_interface.json, Router interface for subnet 7e272118-858f-4aba-bd50-3b848c45e433 on router d286e246-6eea-450b-8eb8-60e2f9f3f873 cannot be deleted, as it is required by one or more floating IPs."}[0m
+	to retry, use: --limit @/root/ansible_advance_homework/site-setup-workstation.retry
+
+PLAY RECAP **********************************************************************************************
+[0;33mlocalhost[0m                  : [0;32mok=2   [0m [0;33mchanged=1   [0m unreachable=0    failed=0   
+[0;31mworkstation-509b.rhpds.opentlc.com[0m : [0;32mok=27  [0m [0;33mchanged=3   [0m unreachable=0    [0;31mfailed=1   [0m
+
+kroot@bastion:~/ansible_advance_homework\[root@bastion ansible_advance_homework]# ansible-playbook site-setup-workstation.yml -e OSP_GUID=${OSP_GUIID} --private-key=/root/.ssh/mykey.pem -u asalgado-redhat.comMsource .bashrc [K
+[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4Pvi[C[C[C[C[C[C[C[C[C[4@source[C[C[C[C[C[C[C[C[Cansible-playbook site-setup-workstation.yml -e OSP_GUID=${OSP_GUIID} --private-key=/root/.ssh/mykey.pem -u asalgado-redhat.comM[K
+[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cansible-playbook site-setup-workstation.yml -e OSP_GUID=${OSP_GUIID} --private-key=/root/.ssh/mykey.pem -u asalgado-redhat.com
+
+PLAY [localhost] ****************************************************************************************
+
+TASK [Gathering Facts] **********************************************************************************
+[0;32mok: [localhost][0m
+
+TASK [Create workstation inventory] *********************************************************************
+[0;33mchanged: [localhost][0m
+
+PLAY [workstation] **************************************************************************************
+
+TASK [Gathering Facts] **********************************************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : include_tasks] ****************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/setup-workstation/tasks/pre-tasks.yml for workstation-509b.rhpds.opentlc.com[0m
+
+TASK [setup-workstation : Setup Yum repos] **************************************************************
+[0;33mchanged: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : yum clean] ********************************************************************
+[1;35m [WARNING]: Consider using the yum module rather than running yum.  If you need to use command because[0m
+[1;35myum is insufficient you can add warn=False to this command task or set command_warnings=False in[0m
+[1;35mansible.cfg to get rid of this message.[0m
+[1;35m[0m
+[0;33mchanged: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Install EPEL repos] ***********************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : install pip] ******************************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Install openstacksdk library] *************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Create clouds.yaml file] ******************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Set openstack.pub authorized key from file] ***********************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : include_tasks] ****************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/setup-workstation/tasks/create-flavor.yml for workstation-509b.rhpds.opentlc.com[0m
+
+TASK [setup-workstation : Create m2.small flavor] *******************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : include_tasks] ****************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/setup-workstation/tasks/create-keypair.yml for workstation-509b.rhpds.opentlc.com[0m
+
+TASK [setup-workstation : Generate key files] ***********************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Create OSP keypair] ***********************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : include_tasks] ****************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/setup-workstation/tasks/create-sg.yml for workstation-509b.rhpds.opentlc.com[0m
+
+TASK [setup-workstation : Create Security Group Apps] ***************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Create Security Group Rule Apps] **********************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={u'ip_prefix': u'0.0.0.0/0', u'port': u'8080'})[0m
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={u'ip_prefix': u'0.0.0.0/0', u'port': u'22'})[0m
+
+TASK [setup-workstation : Create Security Group Frontend] ***********************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Create Security Group Rule Frontend] ******************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={u'ip_prefix': u'0.0.0.0/0', u'port': u'80'})[0m
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={u'ip_prefix': u'0.0.0.0/0', u'port': u'443'})[0m
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={u'ip_prefix': u'0.0.0.0/0', u'port': u'22'})[0m
+
+TASK [setup-workstation : Create Security Group DB] *****************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Create Security Group Rule DB] ************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={u'ip_prefix': u'20.20.20.0/24', u'port': u'5432'})[0m
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={u'ip_prefix': u'0.0.0.0/0', u'port': u'22'})[0m
+
+TASK [setup-workstation : include_tasks] ****************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/setup-workstation/tasks/create-image.yml for workstation-509b.rhpds.opentlc.com[0m
+
+TASK [setup-workstation : Download RHEL image] **********************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : Create openstack image] *******************************************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com][0m
+
+TASK [setup-workstation : include_tasks] ****************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/setup-workstation/tasks/create-network.yml for workstation-509b.rhpds.opentlc.com[0m
+
+TASK [setup-workstation : Configuration of Public and Private Networks] *********************************
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={'value': {u'cloud_name': u'ospcloud', u'state': u'present', u'subnet_name': u'int_subnet', u'external': False, u'cidr_network': u'20.20.20.0/24', u'network_name': u'int_network'}, 'key': u'internal'})[0m
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={'value': {u'cloud_name': u'ospcloud', u'state': u'present', u'subnet_name': u'ext_subnet', u'external': True, u'cidr_network': u'10.10.10.0/24', u'network_name': u'ext_network'}, 'key': u'external'})[0m
+
+TASK [setup-workstation : Configuration of Subnets for Public and Private SubNets] **********************
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={'value': {u'cloud_name': u'ospcloud', u'state': u'present', u'subnet_name': u'int_subnet', u'external': False, u'cidr_network': u'20.20.20.0/24', u'network_name': u'int_network'}, 'key': u'internal'})[0m
+[0;32mok: [workstation-509b.rhpds.opentlc.com] => (item={'value': {u'cloud_name': u'ospcloud', u'state': u'present', u'subnet_name': u'ext_subnet', u'external': True, u'cidr_network': u'10.10.10.0/24', u'network_name': u'ext_network'}, 'key': u'external'})[0m
+
+TASK [setup-workstation : Create Router] ****************************************************************
+[0;33mchanged: [workstation-509b.rhpds.opentlc.com] => (item={'value': {u'cloud_name': u'ospcloud', u'state': u'present', u'name': u'router', u'network': u'ext_network'}, 'key': u'router'})[0m
+
+PLAY [localhost] ****************************************************************************************
+
+TASK [Append inventory file] ****************************************************************************
+[0;33mchanged: [localhost][0m
+
+TASK [Run Ansible Tower setup] **************************************************************************
+[0;33mchanged: [localhost][0m
+
+PLAY RECAP **********************************************************************************************
+[0;33mlocalhost[0m                  : [0;32mok=4   [0m [0;33mchanged=3   [0m unreachable=0    failed=0   
+[0;33mworkstation-509b.rhpds.opentlc.com[0m : [0;32mok=28  [0m [0;33mchanged=3   [0m unreachable=0    failed=0   
+
+kroot@bastion:~/ansible_advance_homework\[root@bastion ansible_advance_homework]# vi ~/.bashrc 
+[?1049h[?1h=[1;26r[34l[34h[?25h[23m[24m[0m[H[J[?25l[26;1H"~/.bashrc" 15L, 207C[1;1H# .bashrc
+
+# User specific aliases and functions
+
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then[11;9H. /etc/bashrc
+fi
+
+OSP_GUID=509b
+TOWER_GUID=c360
+[1m[34m~                                                                                                        [17;1H~                                                                                                        [18;1H~                                                                                                        [19;1H~                                                                                                        [20;1H~                                                                                                        [21;1H~                                                                                                        [22;1H~                                                                                                        [23;1H~                                                                                                        [24;1H~                                                                                                        [25;1H~                                                                                                        [1;1H[34h[?25h
+
+
+
+
+
+
+
+
+[11;8H
+
+
+
+[?25l[0m[26;1H[1m-- INSERT --[0m[26;13H[K[16;1H[K[16;1H[34h[?25h[?25lO[34h[?25h[?25lP[34h[?25h[?25lE[34h[?25h[?25lN[34h[?25h[?25lT[34h[?25h[?25l[16;5H[K[16;5H[34h[?25h[?25l[16;4H[K[16;4H[34h[?25h[?25l[16;3H[K[16;3H[34h[?25h[?25l[16;2H[K[16;2H[34h[?25h[?25l[16;1H[K[16;1H[34h[?25h[?25l[1m[34m~                                                                                                        [15;16H[34h[?25h[?25l[0mOPENTLC_LOGIN[34h[?25h[?25l[15;28H[K[15;28H[34h[?25h[?25l[15;27H[K[15;27H[34h[?25h[?25l[15;26H[K[15;26H[34h[?25h[?25l[15;25H[K[15;25H[34h[?25h[?25l[15;24H[K[15;24H[34h[?25h[?25l[15;23H[K[15;23H[34h[?25h[?25l[15;22H[K[15;22H[34h[?25h[?25l[15;21H[K[15;21H[34h[?25h[?25l[15;20H[K[15;20H[34h[?25h[?25l[15;19H[K[15;19H[34h[?25h[?25l[15;18H[K[15;18H[34h[?25h[?25l[15;17H[K[15;17H[34h[?25h[?25l[15;16H[K[15;16H[34h[?25h[?25l[16;1H[K[16;1H[34h[?25h[?25lOPENTLC_LOGIN[34h[?25h[?25l=[34h[?25h[?25la[34h[?25h[?25ls[34h[?25h[?25la[34h[?25h[?25ll[34h[?25h[?25lg[34h[?25h[?25la[34h[?25h[?25ld[34h[?25h[?25lo[34h[?25h[?25l-[34h[?25h[?25lr[34h[?25h[?25le[34h[?25h[?25ld[34h[?25h[?25lh[34h[?25h[?25la[34h[?25h[?25lt[34h[?25h[?25l.[34h[?25h[?25lc[34h[?25h[?25lo[34h[?25h[?25lm[34h[?25h[?25l[17;1H[K[17;1H[34h[?25h[?25lOPENTLC_PASSWORD[34h[?25h[?25l=[34h[?25h[?25lP[34h[?25h[?25li[34h[?25h[?25lt[34h[?25h[?25lu[34h[?25h[?25lf[34h[?25h[?25li[34h[?25h[?25ln[34h[?25h[?25la[34h[?25h[?25l0[34h[?25h[?25l0[34h[?25h[?25l7[34h[?25h[?25l$[34h[?25h[26;1H[K[17;29H[?25l[34h[?25h[?25l[26;1H:[34h[?25hwq[?25l"~/.bashrc" 17L, 271C written
+[?1l>[34h[?25h[?1049lkroot@bastion:~/ansible_advance_homework\[root@bastion ansible_advance_homework]# ivi ~/.bashrc 
+[?1049h[?1h=[1;26r[34l[34h[?25h[23m[24m[0m[H[J[?25l[26;1H"~/.bashrc" 17L, 271C[1;1H# .bashrc
+
+# User specific aliases and functions
+
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then[11;9H. /etc/bashrc
+fi
+
+OSP_GUID=509b
+TOWER_GUID=c360
+OPENTLC_LOGIN=asalgado-redhat.com
+OPENTLC_PASSWORD=Pitufina007$
+[1m[34m~                                                                                                        [19;1H~                                                                                                        [20;1H~                                                                                                        [21;1H~                                                                                                        [22;1H~                                                                                                        [23;1H~                                                                                                        [24;1H~                                                                                                        [25;1H~                                                                                                        [1;1H[34h[?25h
+
+
+
+
+
+
+
+
+[11;8H
+
+
+
+
+
+[?25l[0m[26;1H[1m-- INSERT --[0m[26;13H[K[18;1H[K[18;1H[34h[?25h[?25lGITHUB_REPO[34h[?25h[?25l=[34h[?25h[?25lhttps://github.com/AlmendraSalgado/ansible_advance_homework.git[34h[?25h[26;1H[K[18;75H[?25l[34h[?25h[?25l[26;1H:[34h[?25hwq[?25l"~/.bashrc" 18L, 347C written
+[?1l>[34h[?25h[?1049lkroot@bastion:~/ansible_advance_homework\[root@bastion ansible_advance_homework]# vi ~/.bashrc 
+[?1049h[?1h=[1;26r[34l[34h[?25h[23m[24m[0m[H[J[?25l[26;1H"~/.bashrc" 18L, 347C[1;1H# .bashrc
+
+# User specific aliases and functions
+
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then[11;9H. /etc/bashrc
+fi
+
+OSP_GUID=509b
+TOWER_GUID=c360
+OPENTLC_LOGIN=asalgado-redhat.com
+OPENTLC_PASSWORD=Pitufina007$
+GITHUB_REPO=https://github.com/AlmendraSalgado/ansible_advance_homework.git
+[1m[34m~                                                                                                        [20;1H~                                                                                                        [21;1H~                                                                                                        [22;1H~                                                                                                        [23;1H~                                                                                                        [24;1H~                                                                                                        [25;1H~                                                                                                        [1;1H[34h[?25h
+
+
+
+
+
+
+
+
+[11;8H
+
+
+
+
+
+
+[?25l[0m[26;1H[1m-- INSERT --[0m[26;13H[K[19;1H[K[19;1H[34h[?25h[?25lJQ_REPO_BASE=http://www.opentlc.com/download/ansible_bootcamp[34h[?25h[?25l[20;1H[K[20;1H[34h[?25h[?25lREGION=<enter region name example us-east-1>[34h[?25h[?25l[21;1H[K[21;1H[34h[?25h[?25lRH_MAIL_ID=<your mail id for dynamic inventory tag>[34h[?25h[?25l[21;51H[K[21;51H[34h[?25h[?25l[21;50H[K[21;50H[34h[?25h[?25l[21;49H[K[21;49H[34h[?25h[?25l[21;48H[K[21;48H[34h[?25h[?25l[34h[?25h[?25l[21;46H[K[21;46H[34h[?25h[?25l[21;45H[K[21;45H[34h[?25h[?25l[21;44H[K[21;44H[34h[?25h[?25l[21;43H[K[21;43H[34h[?25h[?25l[21;42H[K[21;42H[34h[?25h[?25l[21;41H[K[21;41H[34h[?25h[?25l[21;40H[K[21;40H[34h[?25h[?25l[21;39H[K[21;39H[34h[?25h[?25l[21;38H[K[21;38H[34h[?25h[?25l[34h[?25h[?25l[21;36H[K[21;36H[34h[?25h[?25l[21;35H[K[21;35H[34h[?25h[?25l[21;34H[K[21;34H[34h[?25h[?25l[21;33H[K[21;33H[34h[?25h[?25l[21;32H[K[21;32H[34h[?25h[?25l[21;31H[K[21;31H[34h[?25h[?25l[21;30H[K[21;30H[34h[?25h[?25l[34h[?25h[?25l[21;28H[K[21;28H[34h[?25h[?25l[21;27H[K[21;27H[34h[?25h[?25l[21;26H[K[21;26H[34h[?25h[?25l[34h[?25h[?25l[21;24H[K[21;24H[34h[?25h[?25l[21;23H[K[21;23H[34h[?25h[?25l[34h[?25h[?25l[21;21H[K[21;21H[34h[?25h[?25l[21;20H[K[21;20H[34h[?25h[?25l[21;19H[K[21;19H[34h[?25h[?25l[21;18H[K[21;18H[34h[?25h[?25l[34h[?25h[?25l[21;16H[K[21;16H[34h[?25h[?25l[21;15H[K[21;15H[34h[?25h[?25l[21;14H[K[21;14H[34h[?25h[?25l[21;13H[K[21;13H[34h[?25h[?25l[21;12H[K[21;12H[34h[?25h[?25la[34h[?25h[?25ls[34h[?25h[?25la[34h[?25h[?25ll[34h[?25h[?25lg[34h[?25h[?25la[34h[?25h[?25ld[34h[?25h[?25lo[34h[?25h[?25l@[34h[?25h[?25lr[34h[?25h[?25le[34h[?25h[?25ld[34h[?25h[?25lh[34h[?25h[?25la[34h[?25h[?25lt[34h[?25h[?25l.[34h[?25h[?25lc[34h[?25h[?25lo[34h[?25h[?25lm[34h[?25h[?25l[21;30H[K[21;30H[34h[?25h[?25l[21;29H[K[21;29H[34h[?25h[?25l[21;28H[K[21;28H[34h[?25h[?25l[21;27H[K[21;27H[34h[?25h[?25l[21;26H[K[21;26H[34h[?25h[?25l[21;25H[K[21;25H[34h[?25h[?25l[21;24H[K[21;24H[34h[?25h[?25l[21;23H[K[21;23H[34h[?25h[?25l[21;22H[K[21;22H[34h[?25h[?25l[21;21H[K[21;21H[34h[?25h[?25l[21;20H[K[21;20H[34h[?25h[20;20Hn name example us[?25lus-east-1>[20;44H[K[20;34H[34h[?25h[?25lus-east-1>[20;43H[K[20;33H[34h[?25h[?25lus-east-1>[20;42H[K[20;32H[34h[?25h[?25lus-east-1>[20;41H[K[20;31H[34h[?25h[?25lus-east-1>[20;40H[K[20;30H[34h[?25h[?25lus-east-1>[20;39H[K[20;29H[34h[?25h[?25lus-east-1>[20;38H[K[20;28H[34h[?25h[?25lus-east-1>[20;37H[K[20;27H[34h[?25h[?25lus-east-1>[20;36H[K[20;26H[34h[?25h[?25lus-east-1>[20;35H[K[20;25H[34h[?25h[?25lus-east-1>[20;34H[K[20;24H[34h[?25h[?25lus-east-1>[20;33H[K[20;23H[34h[?25h[?25lus-east-1>[20;32H[K[20;22H[34h[?25h[?25lus-east-1>[20;31H[K[20;21H[34h[?25h[?25lus-east-1>[20;30H[K[20;20H[34h[?25h[?25lus-east-1>[20;29H[K[20;19H[34h[?25h[?25lus-east-1>[20;28H[K[20;18H[34h[?25h[?25lus-east-1>[20;27H[K[20;17H[34h[?25h[?25lus-east-1>[20;26H[K[20;16H[34h[?25h[?25lus-east-1>[20;25H[K[20;15H[34h[?25h[?25lus-east-1>[20;24H[K[20;14H[34h[?25h[?25lus-east-1>[20;23H[K[20;13H[34h[?25h[?25lus-east-1>[20;22H[K[20;12H[34h[?25h[?25lus-east-1>[20;21H[K[20;11H[34h[?25h[?25lus-east-1>[20;20H[K[20;10H[34h[?25h[?25lus-east-1>[20;19H[K[20;9H[34h[?25h[?25lus-east-1>[20;18H[K[20;8H[34h[?25h[10C[?25l[20;17H[K[20;17H[34h[?25h[26;1H[K[20;16H[?25l[34h[?25h[?25l[26;1H:[34h[?25hwq[?25l"~/.bashrc" 21L, 446C written
+[?1l>[34h[?25h[?1049lkroot@bastion:~/ansible_advance_homework\[root@bastion ansible_advance_homework]# vi ~/.bashrc [1P[1P[1@s[1@o[1@u[1@r[1@c[1@e
+kroot@bastion:~/ansible_advance_homework\[root@bastion ansible_advance_homework]# ansible-playbook site-config-tower.yml tower_GUID=${TOWER_GUID}  -e osp_GUID=${OSP_GUID} -eM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C-tower_GUID=${TOWER_GUID} [1@-M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cetower_GUID=${TOWER_GUID}[1@ M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C tower_GUID=${TOWER_GUID[1@}M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C opentlc_login=${OPENTLC_LOGIN} -e path_to_opentlc_key=/root/.ssh/mykey.pem  -e param_repo_base=${JQ_REPO_BASE} -e opentlc_password=${OPENTLC_PASSWORD} -e REGION_NAME=${REGION} -e EM AIL=${RH_MAIL_ID} -e github_repo=${GITHUB_REPO}
+
+PLAY [localhost] ****************************************************************************************
+
+TASK [config-tower : include_tasks] *********************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/config-tower/tasks/pre-config-tower.yml for localhost[0m
+
+TASK [config-tower : Generate var file for order_svc.sh script] *****************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Generate var file for tower module] ************************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Copy opentlc ssh keys] *************************************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Copy inventory vars] ***************************************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Generate tower_cli.cfg to connect with Tower] **************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : include_tasks] *********************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/config-tower/tasks/post-config-tower.yml for localhost[0m
+
+TASK [config-tower : Machine Credentail to connect to workstation using openstack.pub] ******************
+[0;31mfatal: [localhost]: FAILED! => {"changed": false, "msg": "Failed to update credential: The Tower server claims it was sent a bad request.\n\nPOST https://tower1.c360.example.opentlc.com/api/v2/credentials/\nParams: None\nData: {\"inputs\": {\"username\": \"cloud-user\", \"ssh_key_data\": \"# BEGIN ANSIBLE MANAGED BLOCK\\n-----BEGIN RSA PRIVATE KEY-----\\nMIIEpAIBAAKCAQEAwUwmH6fy7yR6cjKmQXl6F/4x8/yweMgHkQTGC391f5KKXCHr\\nUEB2CJIFveiwfQpkAAV/YXqKKbAyvLY+SGYM//3T6n2GqZvkuJs/IyDhbyMJlJXu\\nojNinQbzBqiASolEVaE8EGWTKFs2RKpmhxa0bja2Qg1CfAdy5jQaqd1ELZ2FLhtl\\nbYP6veFqpb+5xogSf209B4T467BRlybNvRd+eKyt16fSnijvUQdj2DYCCdtihTTm\\ndyFeuyOW3driUFxxLkGKgHpx4f3CLdRonDlRhyq/UUDp4M+NPd/7blX4sISMimVV\\nruF5txvMer/Z8oOIn4uV0gTb1wQrl0nYr7/snQIDAQABAoIBABw9qug/GnA0DSu4\\nGLBCNkNhIR07kvDikLBwWRr+8UTFPS++yOl9sYEJDIu1fmuWZAvYwcaVJ7B1jMQj\\ngDAFsOqJxDdjRZRsMVuDWxMfz6/0F4c87JOIHGVCyaj0X2IEchZsqyDeJkTkJqab\\nmsUr3QqpNbGqzEbgs7nMbQTaTga31r0SY2IND0p8BfheUfAEZz5Q9EWIoeAvjL8v\\n3apSO+ffRzzJy3Z40m3ZxKRVq5pDEzfWPYKkzKsTH/n2kzs40RYDNoTt6Hcpc000\\noV2pz5sNrbHcT77G411dQd5c2Fa0k9rgx5DHIxx2w4/Mlq6ufaYAWOO9kwXGHN1I\\ntOvKyCUCgYEA7weJ4RrHdwLv0TbQamYkXg0Mvkg4Ffiafv2CssVb54NzzAtjktD5\\nWNz9C3sCe3JyS6DQXJEOLpXAWOcwT3QfOPeJUFVVibkB5v07FAM6VShCACyaeQ8/\\nNNyrQldnsVtLuf3aiHUH+AXuh2LuFEQX5/bhBvqI03dO3EHASDvsyyMCgYEAzwVp\\newHY5j0q9plN12bZvRcRNM7xkjX304r/+aY3bRYF0BHp7WSjrejmQ8Y9ZKNeyHoa\\njNDrE0Yy2RXMoWkH+rmPHovPqTiSxSsX1NEqDQEcU+O1ISRgPivgjQnPl+a/9Z1l\\nVQ7kcdkfy0tPO5TGk1uV66QclynAM4SNHV24xT8CgYEAnQ3R/XMv/jWSx1+Bv3dP\\ni/B9IAWpvF31fV0q5DWi9lI74qTVDyF5xHanWUTA08XV7XVDkp7It7kzgfadmocN\\nAMw8j+kR5AUIh/J5P+QDDvL9ssmb0dE/0YbwjA2MF0+KSTHPxftHeiLDoHdTQUOg\\nhYyEPKafAnsQ+M3G/m9JXgsCgYBcHkJjc9z6BnnZpTnYAXIeC+eiIfuoXc9bGFzy\\nz52WMth/T5lSAxg6SIo92jZzU6bXek3aHxSbTP9PTb3yjPP6AxvGMdxDpmLYzWYb\\nUr9tbfMW+RoeFzukLo4K9DSlmQ4N0u3GPYw1hLH7GhW1o2wBIh3B7xKxyOg3hGHu\\nkUeorQKBgQC684OaGy2X1MO+iiIv0YgkCjECdyFMLtAjEp2nPDqu42/QE5gxzEq4\\nmAj94U2I2/DUBCKvlSwB2a+n6vkgWgkOMkbfi6jYC5J3ktrMqK4pWWQ/GPSijekt\\nZFQOKTpno3xXhUsz9Ts4shClaG+BscqHeX0yfs1hknbsCSNuCnZxmQ==\\n-----END RSA PRIVATE KEY-----\\n# END ANSIBLE MANAGED BLOCK\\n\"}, \"organization\": 1, \"name\": \"Connect_to_workstation\", \"credential_type\": 1}\n\nResponse: {\"inputs\":{\"ssh_key_data\":[\"Invalid certificate or key: # BEGIN ANSIBLE MANAGED BLOCK\\n-----BEGIN RSA PRIVATE KEY-----\\nMIIEpAIBAAKCAQEAwUwmH6fy7yR6cjKmQXl6F/...\"]}}"}[0m
+	to retry, use: --limit @/root/ansible_advance_homework/site-config-tower.retry
+
+PLAY RECAP **********************************************************************************************
+[0;31mlocalhost[0m                  : [0;32mok=7   [0m [0;33mchanged=5   [0m unreachable=0    [0;31mfailed=1   [0m
+
+kroot@bastion:~/ansible_advance_homework\[root@bastion ansible_advance_homework]# ansible-playbook site-config-tower.yml -e tower_GUID=${TOWER_GUIDD} -e osp_GUID=${OSP_GUID} -e opentlc_login=${OPENTLC_LOGIN} -e path_to_opentlc_key=/root/.ssh/mykey.pem --e param_repo_base=${JQ_REPO_BASE} -e opentlc_password=${OPENTLC_PASSWORD} -e REGION_NAME=${REGION} -e EMAAIL=${RH_MAIL_ID} -e github_repo=${GITHUB_REPO}MMMsource ~/.bashrc [K
+[K
+[K
+[KMMM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4Pvi[C[C[C[C[C[C[C[C[C[C[Cansible-playbook site-setup-workstation.yml -e OSP_GUID=${OSP_GUIID} --private-key=/root/.ssh/mykey.pem -u asalgado-redhat.comMvi ~/.bashrc [K
+[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4@source[C[C[C[C[C[C[C[C[C[C[Cansible-playbook site-config-tower.yml -e tower_GUID=${TOWER_GUIDD} -e osp_GUID=${OSP_GUID} -e opentlc_login=${OPENTLC_LOGIN} -e path_to_opentlc_key=/root/.ssh/mykey.pem --e param_repo_base=${JQ_REPO_BASE} -e opentlc_password=${OPENTLC_PASSWORD} -e REGION_NAME=${REGION} -e EMAAIL=${RH_MAIL_ID} -e github_repo=${GITHUB_REPO}MMM[K
+[K
+[K
+[KMMM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cansible-playbook site-config-tower.yml -e tower_GUID=${TOWER_GUIDD} -e osp_GUID=${OSP_GUID} -e opentlc_login=${OPENTLC_LOGIN} -e path_to_opentlc_key=/root/.ssh/mykey.pem --e param_repo_base=${JQ_REPO_BASE} -e opentlc_password=${OPENTLC_PASSWORD} -e REGION_NAME=${REGION} -e EMAAIL=${RH_MAIL_ID} -e github_repo=${GITHUB_REPO}MMMsource ~/.bashrc [K
+[K
+[K
+[KMMM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4Pvi[C[C[C[C[C[C[C[C[C[C[C[4@source[C[C[C[C[C[C[C[C[C[C[Cansible-playbook site-config-tower.yml -e tower_GUID=${TOWER_GUIDD} -e osp_GUID=${OSP_GUID} -e opentlc_login=${OPENTLC_LOGIN} -e path_to_opentlc_key=/root/.ssh/mykey.pem --e param_repo_base=${JQ_REPO_BASE} -e opentlc_password=${OPENTLC_PASSWORD} -e REGION_NAME=${REGION} -e EMAAIL=${RH_MAIL_ID} -e github_repo=${GITHUB_REPO}MMM[K
+[K
+[K
+[KMMM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cvi ~/.ssh/openstack.pub 
+[?1049h[?1h=[1;26r[34l[34h[?25h[23m[24m[0m[H[J[?25l[26;1H"~/.ssh/openstack.pub" [readonly] 3L, 439C[1;1H# BEGIN ANSIBLE MANAGED BLOCK
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDBTCYfp/LvJHpyMqZBeXoX/jHz/LB4yAeRBMYLf3V/kopcIetQQHYIkgW96LB9CmQABB[3;1HX9heoopsDK8tj5IZgz//dPqfYapm+S4mz8jIOFvIwmUle6iM2KdBvMGqIBKiURVoTwQZZMoWzZEqmaHFrRuNrZCDUJ8B3LmNBqp3UQtnYY[4;1HUuG2Vtg/q94Wqlv7nGiBJ/bT0HhPjrsFGXJs29F354rK3Xp9KeKO9RB2PYNgIJ22KFNOZ3IV67I5bd2uJQXHEuQYqAenHh/cIt1GicOVGG[5;1HHKr9RQOngz4093/tuVfiwhIyKZVWu4Xm3G8x6v9nyg4ifi5XSBNvXBCuXSdivv+yd
+# END ANSIBLE MANAGED BLOCK
+[1m[34m~                                                                                                        [8;1H~                                                                                                        [9;1H~                                                                                                        [10;1H~                                                                                                        [11;1H~                                                                                                        [12;1H~                                                                                                        [13;1H~                                                                                                        [14;1H~                                                                                                        [15;1H~                                                                                                        [16;1H~                                                                                                        [17;1H~                                                                                                        [18;1H~                                                                                                        [19;1H~                                                                                                        [20;1H~                                                                                                        [21;1H~                                                                                                        [22;1H~                                                                                                        [23;1H~                                                                                                        [24;1H~                                                                                                        [25;1H~                                                                                                        [1;1H[34h[?25h[?25l[0m[26;1H[K[26;1H:[34h[?25hq[?25l[26;1H[K[26;1H[?1l>[34h[?25h[?1049lkroot@bastion:~/ansible_advance_homework\[root@bastion ansible_advance_homework]# vi ~/.ssh/openstack.pub [K[K[Kem 
+[?1049h[?1h=[1;26r[34l[34h[?25h[23m[24m[0m[H[J[?25l[26;1H"~/.ssh/openstack.pem" [readonly] 29L, 1737C[1;1H# BEGIN ANSIBLE MANAGED BLOCK
+-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAwUwmH6fy7yR6cjKmQXl6F/4x8/yweMgHkQTGC391f5KKXCHr
+UEB2CJIFveiwfQpkAAV/YXqKKbAyvLY+SGYM//3T6n2GqZvkuJs/IyDhbyMJlJXu
+ojNinQbzBqiASolEVaE8EGWTKFs2RKpmhxa0bja2Qg1CfAdy5jQaqd1ELZ2FLhtl
+bYP6veFqpb+5xogSf209B4T467BRlybNvRd+eKyt16fSnijvUQdj2DYCCdtihTTm
+dyFeuyOW3driUFxxLkGKgHpx4f3CLdRonDlRhyq/UUDp4M+NPd/7blX4sISMimVV
+ruF5txvMer/Z8oOIn4uV0gTb1wQrl0nYr7/snQIDAQABAoIBABw9qug/GnA0DSu4
+GLBCNkNhIR07kvDikLBwWRr+8UTFPS++yOl9sYEJDIu1fmuWZAvYwcaVJ7B1jMQj
+gDAFsOqJxDdjRZRsMVuDWxMfz6/0F4c87JOIHGVCyaj0X2IEchZsqyDeJkTkJqab
+msUr3QqpNbGqzEbgs7nMbQTaTga31r0SY2IND0p8BfheUfAEZz5Q9EWIoeAvjL8v
+3apSO+ffRzzJy3Z40m3ZxKRVq5pDEzfWPYKkzKsTH/n2kzs40RYDNoTt6Hcpc000
+oV2pz5sNrbHcT77G411dQd5c2Fa0k9rgx5DHIxx2w4/Mlq6ufaYAWOO9kwXGHN1I
+tOvKyCUCgYEA7weJ4RrHdwLv0TbQamYkXg0Mvkg4Ffiafv2CssVb54NzzAtjktD5
+WNz9C3sCe3JyS6DQXJEOLpXAWOcwT3QfOPeJUFVVibkB5v07FAM6VShCACyaeQ8/
+NNyrQldnsVtLuf3aiHUH+AXuh2LuFEQX5/bhBvqI03dO3EHASDvsyyMCgYEAzwVp
+ewHY5j0q9plN12bZvRcRNM7xkjX304r/+aY3bRYF0BHp7WSjrejmQ8Y9ZKNeyHoa
+jNDrE0Yy2RXMoWkH+rmPHovPqTiSxSsX1NEqDQEcU+O1ISRgPivgjQnPl+a/9Z1l
+VQ7kcdkfy0tPO5TGk1uV66QclynAM4SNHV24xT8CgYEAnQ3R/XMv/jWSx1+Bv3dP
+i/B9IAWpvF31fV0q5DWi9lI74qTVDyF5xHanWUTA08XV7XVDkp7It7kzgfadmocN
+AMw8j+kR5AUIh/J5P+QDDvL9ssmb0dE/0YbwjA2MF0+KSTHPxftHeiLDoHdTQUOg
+hYyEPKafAnsQ+M3G/m9JXgsCgYBcHkJjc9z6BnnZpTnYAXIeC+eiIfuoXc9bGFzy
+z52WMth/T5lSAxg6SIo92jZzU6bXek3aHxSbTP9PTb3yjPP6AxvGMdxDpmLYzWYb
+Ur9tbfMW+RoeFzukLo4K9DSlmQ4N0u3GPYw1hLH7GhW1o2wBIh3B7xKxyOg3hGHu
+kUeorQKBgQC684OaGy2X1MO+iiIv0YgkCjECdyFMLtAjEp2nPDqu42/QE5gxzEq4[1;1H[34h[?25h[?25l[26;1H[31mW10: Warning: Changing a readonly file[0m[26;40H[K[1;25r[25;1H
+[1;26r[25;1HmAj94U2I2/DUBCKvlSwB2a+n6vkgWgkOMkbfi6jYC5J3ktrMqK4pWWQ/GPSijekt[26;1H[K[1;1H[34h[?25h
+[?25l[26;1H:[34h[?25hq![?25l[26;1H[K[26;1H[?1l>[34h[?25h[?1049lkroot@bastion:~/ansible_advance_homework\[root@bastion ansible_advance_homework]# vi ~/.ssh/openstack.pem [1P[1P[1@c[1@h[1@m[1@o[1@d[C[1@ [1@0[1@6[1@0[1@0
+kroot@bastion:~/ansible_advance_homework\[root@bastion ansible_advance_homework]# chmod 0600 ~/.ssh/openstack.pem [8Pvi[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[?1049h[?1h=[1;26r[34l[34h[?25h[23m[24m[0m[H[J[?25l[26;1H"~/.ssh/openstack.pem" 29L, 1737C[1;1H# BEGIN ANSIBLE MANAGED BLOCK
+-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAwUwmH6fy7yR6cjKmQXl6F/4x8/yweMgHkQTGC391f5KKXCHr
+UEB2CJIFveiwfQpkAAV/YXqKKbAyvLY+SGYM//3T6n2GqZvkuJs/IyDhbyMJlJXu
+ojNinQbzBqiASolEVaE8EGWTKFs2RKpmhxa0bja2Qg1CfAdy5jQaqd1ELZ2FLhtl
+bYP6veFqpb+5xogSf209B4T467BRlybNvRd+eKyt16fSnijvUQdj2DYCCdtihTTm
+dyFeuyOW3driUFxxLkGKgHpx4f3CLdRonDlRhyq/UUDp4M+NPd/7blX4sISMimVV
+ruF5txvMer/Z8oOIn4uV0gTb1wQrl0nYr7/snQIDAQABAoIBABw9qug/GnA0DSu4
+GLBCNkNhIR07kvDikLBwWRr+8UTFPS++yOl9sYEJDIu1fmuWZAvYwcaVJ7B1jMQj
+gDAFsOqJxDdjRZRsMVuDWxMfz6/0F4c87JOIHGVCyaj0X2IEchZsqyDeJkTkJqab
+msUr3QqpNbGqzEbgs7nMbQTaTga31r0SY2IND0p8BfheUfAEZz5Q9EWIoeAvjL8v
+3apSO+ffRzzJy3Z40m3ZxKRVq5pDEzfWPYKkzKsTH/n2kzs40RYDNoTt6Hcpc000
+oV2pz5sNrbHcT77G411dQd5c2Fa0k9rgx5DHIxx2w4/Mlq6ufaYAWOO9kwXGHN1I
+tOvKyCUCgYEA7weJ4RrHdwLv0TbQamYkXg0Mvkg4Ffiafv2CssVb54NzzAtjktD5
+WNz9C3sCe3JyS6DQXJEOLpXAWOcwT3QfOPeJUFVVibkB5v07FAM6VShCACyaeQ8/
+NNyrQldnsVtLuf3aiHUH+AXuh2LuFEQX5/bhBvqI03dO3EHASDvsyyMCgYEAzwVp
+ewHY5j0q9plN12bZvRcRNM7xkjX304r/+aY3bRYF0BHp7WSjrejmQ8Y9ZKNeyHoa
+jNDrE0Yy2RXMoWkH+rmPHovPqTiSxSsX1NEqDQEcU+O1ISRgPivgjQnPl+a/9Z1l
+VQ7kcdkfy0tPO5TGk1uV66QclynAM4SNHV24xT8CgYEAnQ3R/XMv/jWSx1+Bv3dP
+i/B9IAWpvF31fV0q5DWi9lI74qTVDyF5xHanWUTA08XV7XVDkp7It7kzgfadmocN
+AMw8j+kR5AUIh/J5P+QDDvL9ssmb0dE/0YbwjA2MF0+KSTHPxftHeiLDoHdTQUOg
+hYyEPKafAnsQ+M3G/m9JXgsCgYBcHkJjc9z6BnnZpTnYAXIeC+eiIfuoXc9bGFzy
+z52WMth/T5lSAxg6SIo92jZzU6bXek3aHxSbTP9PTb3yjPP6AxvGMdxDpmLYzWYb
+Ur9tbfMW+RoeFzukLo4K9DSlmQ4N0u3GPYw1hLH7GhW1o2wBIh3B7xKxyOg3hGHu
+kUeorQKBgQC684OaGy2X1MO+iiIv0YgkCjECdyFMLtAjEp2nPDqu42/QE5gxzEq4[1;1H[34h[?25h[?25l[1;25r[25;1H
+[1;26r[25;1HmAj94U2I2/DUBCKvlSwB2a+n6vkgWgkOMkbfi6jYC5J3ktrMqK4pWWQ/GPSijekt[26;1H[K[1;1H[34h[?25h
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[?25l[1;25r[25;1H
+[1;26r[25;1HZFQOKTpno3xXhUsz9Ts4shClaG+BscqHeX0yfs1hknbsCSNuCnZxmQ==[34h[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H-----END RSA PRIVATE KEY-----[34h[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H# END ANSIBLE MANAGED BLOCK[34h[?25h[?25l[1m[34m~                                                                                                        [24;1H[34h[?25h[?25l
+
+[0m:[34h[?25hwq[?25l"~/.ssh/openstack.pem" 27L, 1679C written
+[?1l>[34h[?25h[?1049lkroot@bastion:~/ansible_advance_homework\[root@bastion ansible_advance_homework]# vi ~/.ssh/openstack.pem [8@chmod 0600[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8Pvi[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cub[Cansible-playbook site-config-tower.yml -e tower_GUID=${TOWER_GUIDD} -e osp_GUID=${OSP_GUID} -e opentlc_login=${OPENTLC_LOGIN} -e path_to_opentlc_key=/root/.ssh/mykey.pem --e param_repo_base=${JQ_REPO_BASE} -e opentlc_password=${OPENTLC_PASSWORD} -e REGION_NAME=${REGION} -e EMAAIL=${RH_MAIL_ID} -e github_repo=${GITHUB_REPO}
+
+PLAY [localhost] ****************************************************************************************
+
+TASK [config-tower : include_tasks] *********************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/config-tower/tasks/pre-config-tower.yml for localhost[0m
+
+TASK [config-tower : Generate var file for order_svc.sh script] *****************************************
+[0;32mok: [localhost][0m
+
+TASK [config-tower : Generate var file for tower module] ************************************************
+[0;32mok: [localhost][0m
+
+TASK [config-tower : Copy opentlc ssh keys] *************************************************************
+[0;32mok: [localhost][0m
+
+TASK [config-tower : Copy inventory vars] ***************************************************************
+[0;32mok: [localhost][0m
+
+TASK [config-tower : Generate tower_cli.cfg to connect with Tower] **************************************
+[0;32mok: [localhost][0m
+
+TASK [config-tower : include_tasks] *********************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/config-tower/tasks/post-config-tower.yml for localhost[0m
+
+TASK [config-tower : Machine Credentail to connect to workstation using openstack.pub] ******************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Create Homework Assignment project] ************************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Create Inventory] ******************************************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Create Group in static inventory] **************************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Add workstation host in tower_inventory] *******************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Associate workstation host to group] ***********************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Tower Creds key file] **************************************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Remove secret] *********************************************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : include_tasks] *********************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/config-tower/tasks/ec2_dynamic.yml for localhost[0m
+
+TASK [config-tower : Create Dynamic Inventory] **********************************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Create groups needed to deploy app] ************************************************
+[0;33mchanged: [localhost] => (item=apps)[0m
+[0;33mchanged: [localhost] => (item=appdbs)[0m
+[0;33mchanged: [localhost] => (item=frontends)[0m
+[0;33mchanged: [localhost] => (item=bastions)[0m
+[0;33mchanged: [localhost] => (item=tag_AnsibleGroup_bastions)[0m
+[0;33mchanged: [localhost] => (item=tag_AnsibleGroup_frontends)[0m
+[0;33mchanged: [localhost] => (item=tag_AnsibleGroup_apps)[0m
+[0;33mchanged: [localhost] => (item=tag_AnsibleGroup_appdbs)[0m
+
+TASK [config-tower : Associate AWS tags as children to bastions group] **********************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Associate AWS tags as children to frontends group] *********************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Associate AWS tags as children to apps group] **************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Associate AWS tags as children to appdbs group] ************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Add localhost as host] *************************************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Create inventory source with ec2 script] *******************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : include_tasks] *********************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/config-tower/tasks/job_template.yml for localhost[0m
+
+TASK [config-tower : Job template for OSP Instances] ****************************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Associate IG to OSP instances job template] ****************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Create vault credential] ***********************************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Job template for 3tier app deploy on QA Env] ***************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Associate IG to 3tier job template] ************************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Job template to delete OSP Instances] **********************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Associate IG to OSP Delete instances job template] *********************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Job template for smoke test osp instances] *****************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Associate IG to Smoke test job template] *******************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Job template for Provisioning AWS env] *********************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Job template for injecting AWS SSH keys] *******************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Job template for checking AWS instances status] ************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Job template for 3tier AWS deploy] *************************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Job template for smoke test aws instances] *****************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : include_tasks] *********************************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/config-tower/tasks/workflow_template.yml for localhost[0m
+
+TASK [config-tower : Create CI CD Workflow] *************************************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Create workflow schema] ************************************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Create workflow using schema] ******************************************************
+[0;33mchanged: [localhost][0m
+
+PLAY RECAP **********************************************************************************************
+[0;33mlocalhost[0m                  : [0;32mok=43  [0m [0;33mchanged=33  [0m unreachable=0    failed=0   
+
+kroot@bastion:~/ansible_advance_homework\[root@bastion ansible_advance_homework]# [K[root@bastion ansible_advance_homework]# ansible-playbook site-config-tower.yml -e towwer_GUID=${TOWER_GUID} -e osp_GUID=${OSP_GUID} -e opentlc_login=${OPENTLC_LOGIN} -e paath_to_opentlc_key=/root/.ssh/mykey.pem -e param_repo_base=${JQ_REPO_BASE} -e opentlc__password=${OPENTLC_PASSWORD} -e REGION_NAME=${REGION} -e EMAIL=${RH_MAIL_ID} -e githuub_repo=${GITHUB_REPO}
+
+PLAY [localhost] ********************************************************************
+
+TASK [config-tower : include_tasks] *************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/config-tower/tasks/pre-config-tower.yml for localhost[0m
+
+TASK [config-tower : Generate var file for order_svc.sh script] *********************
+[0;32mok: [localhost][0m
+
+TASK [config-tower : Generate var file for tower module] ****************************
+[0;32mok: [localhost][0m
+
+TASK [config-tower : Copy opentlc ssh keys] *****************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Copy inventory vars] *******************************************
+[0;32mok: [localhost][0m
+
+TASK [config-tower : Generate tower_cli.cfg to connect with Tower] ******************
+[0;32mok: [localhost][0m
+
+TASK [config-tower : include_tasks] *************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/config-tower/tasks/post-config-tower.yml for localhost[0m
+
+TASK [config-tower : Machine Credentail to connect to workstation using openstack.pub] ***
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Create Homework Assignment project] ****************************
+[0;32mok: [localhost][0m
+
+TASK [config-tower : Create Inventory] **********************************************
+[0;32mok: [localhost][0m
+
+TASK [config-tower : Create Group in static inventory] ******************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Add workstation host in tower_inventory] ***********************
+[0;32mok: [localhost][0m
+
+TASK [config-tower : Associate workstation host to group] ***************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Tower Creds key file] ******************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Remove secret] *************************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : include_tasks] *************************************************
+[0;36mincluded: /root/ansible_advance_homework/roles/config-tower/tasks/ec2_dynamic.yml for localhost[0m
+
+TASK [config-tower : Create Dynamic Inventory] **************************************
+[0;33mchanged: [localhost][0m
+
+TASK [config-tower : Create groups needed to deploy app] ****************************
+[0;33mchanged: [localhost] => (item=apps)[0m
+[0;33mchanged: [localhost] => (item=appdbs)[0m
+[0;33mchanged: [localhost] => (item=frontends)[0m
+[0;33mchanged: [localhost] => (item=bastions)[0m
+[0;33mchanged: [localhost] => (item=tag_AnsibleGroup_bastions)[0m
+[0;33mchanged: [localhost] => (item=tag_AnsibleGroup_frontends)[0m
+[0;33mchanged: [localhost] => (item=tag_AnsibleGroup_apps)[0m
+^CProcess WorkerProcess-18:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/multiprocessing/process.py", line 258, in _bootstrap
+[0;31m [ERROR]: User interrupted execution[0m
+[0;31m[0m
+    self.run()
+  File "/usr/lib/python2.7/site-packages/ansible/executor/process/worker.py", line 118, in run
+    self._final_q
+  File "/usr/lib/python2.7/site-packages/ansible/executor/task_executor.py", line 105, in run
+    item_results = self._run_loop(items)
+  File "/usr/lib/python2.7/site-packages/ansible/executor/task_executor.py", line 337, in _run_loop
+    res = self._execute(variables=task_vars)
+  File "/usr/lib/python2.7/site-packages/ansible/executor/task_executor.py", line 598, in _execute
+    result = self._handler.run(task_vars=variables)
+  File "/usr/lib/python2.7/site-packages/ansible/plugins/action/command.py", line 24, in run
+    results = merge_hash(results, self._execute_module(task_vars=task_vars, wrap_async=wrap_async))
+  File "/usr/lib/python2.7/site-packages/ansible/plugins/action/__init__.py", line 839, in _execute_module
+    res = self._low_level_execute_command(cmd, sudoable=sudoable, in_data=in_data)
+  File "/usr/lib/python2.7/site-packages/ansible/plugins/action/__init__.py", line 954, in _low_level_execute_command
+    rc, stdout, stderr = self._connection.exec_command(cmd, in_data=in_data, sudoable=sudoable)
+  File "/usr/lib/python2.7/site-packages/ansible/plugins/connection/local.py", line 133, in exec_command
+    stdout, stderr = p.communicate(in_data)
+  File "/usr/lib64/python2.7/subprocess.py", line 800, in communicate
+    return self._communicate(input)
+  File "/usr/lib64/python2.7/subprocess.py", line 1401, in _communicate
+    stdout, stderr = self._communicate_with_poll(input)
+  File "/usr/lib64/python2.7/subprocess.py", line 1455, in _communicate_with_poll
+    ready = poller.poll()
+KeyboardInterrupt
+kroot@bastion:~/ansible_advance_homework\[root@bastion ansible_advance_homework]# ansible-playbook site-config-tower.yml -e towwer_GUID=${TOWER_GUID} -e osp_GUID=${OSP_GUID} -e opentlc_login=${OPENTLC_LOGIN} -e paath_to_opentlc_key=/root/.ssh/mykey.pem -e param_repo_base=${JQ_REPO_BASE} -e opentlc__password=${OPENTLC_PASSWORD} -e REGION_NAME=${REGION} -e EMAIL=${RH_MAIL_ID} -e githuub_repo=${GITHUB_REPO}MMMM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[20Pvi ~/.ssh/openstack.pem 
+[K
+[K
+[K
+[KMMMM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8@chmod 0600[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8Pvi[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cub[Cansible-playbook site-config-tower.yml -e towwer_GUID=${TOWER_GUID} -e osp_GUID=${OSP_GUID} -e opentlc_login=${OPENTLC_LOGIN} -e paath_to_opentlc_key=/root/.ssh/mykey.pem -e param_repo_base=${JQ_REPO_BASE} -e opentlc__password=${OPENTLC_PASSWORD} -e REGION_NAME=${REGION} -e EMAIL=${RH_MAIL_ID} -e githuub_repo=${GITHUB_REPO}MMMM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[27Psource ~/.bashrc 
+[K
+[K
+[K
+[KMMMM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4Pvi[C[C[C[C[C[C[C[C[C[C[Cansible-playbook site-setup-workstation.yml --e OSP_GUID=${OSP_GUID} --private-key=/root/.ssh/mykey.pem -u asalgado-redhat.comM[29Psource .bashrc
+[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4Pvi[C[C[C[C[C[C[C[C[C[17@chmod 0400 .ssh/prv_key.pem[Cls .ssh/[K[4Pcd ~p /tmp/prv_key.pem ~/.ssh/d ~[Kls .ssh/chmod 0400 .ssh/prv_key.pem [17Pvi .bashrc[C[4@source[C[C[C[C[C[C[C[C[Cansible-playbook site-setup-workstation.yml --e OSP_GUID=${OSP_GUID} --private-key=/root/.ssh/mykey.pem -u asalgado-redhat.comMvi ~/.bashrc [K
+[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4@source[C[C[C[C[C[C[C[C[C[C[Cansible-playbook site-config-tower.yml -e towwer_GUID=${TOWER_GUID} -e osp_GUID=${OSP_GUID} -e opentlc_login=${OPENTLC_LOGIN} -e paath_to_opentlc_key=/root/.ssh/mykey.pem -e param_repo_base=${JQ_REPO_BASE} -e opentlc__password=${OPENTLC_PASSWORD} -e REGION_NAME=${REGION} -e EMAIL=${RH_MAIL_ID} -e githuub_repo=${GITHUB_REPO}MMMM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[20Pvi ~/.ssh/openstack.pub 
+[K
+[K
+[K
+[KMMMM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cem[C[8@chmod 0600[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8Pvi[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cansible-playbook site-config-tower.yml -e towwer_GUID=${TOWER_GUID} -e osp_GUID=${OSP_GUID} -e opentlc_login=${OPENTLC_LOGIN} -e paath_to_opentlc_key=/root/.ssh/mykey.pem -e param_repo_base=${JQ_REPO_BASE} -e opentlc__password=${OPENTLC_PASSWORD} -e REGION_NAME=${REGION} -e EMAIL=${RH_MAIL_ID} -e githuub_repo=${GITHUB_REPO}MMMM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K
+[K
+[K
+[KMMMM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit
+exit
