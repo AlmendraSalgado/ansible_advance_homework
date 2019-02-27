@@ -8,10 +8,6 @@
 #    - lbs
 #    - haproxy
 
-- debug:
-    msg: "{{ item }}"
-  with_items: groups.apps
-
 - name: Configure HAproxy using configuration file
   template:
     src: haproxy.cfg.j2
