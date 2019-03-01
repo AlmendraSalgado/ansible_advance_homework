@@ -1,7 +1,7 @@
 Role Name: app-tier
 =========
 
-This role performs the setup for http services in the app nodes in the three tier app environment. It will install tomcat and httpd (if it is specified), create directory paths to deploy html templates and start/enable the services.
+This role performs the setup for webservices services in the app nodes in the three tier app environment. It will install tomcat and httpd (if it is specified), create directory paths to deploy html templates and start/enable the services.
 
 Requirements
 ------------

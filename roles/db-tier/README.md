@@ -1,31 +1,37 @@
-Role Name
+Role Name: db-tier
 =========
 
-A brief description of the role goes here.
+This role performs the setup for db services in the db nodes in the three tier app environment. It will install postgresql packages, check if the database was previously initialized, initialize the db if It wasn't do it before and start/enable the service.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+The only requirement is to have access to the correct repositories to install the required packages.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+The role has the next default variables:
+
+| Defaults Variables | Description |
+| ------------- | ------------- |
+| POSTGRESQL_PACKAGES | PostgreSQL packages to install  |
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+It doesn't have any role dependencies.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+An example to use this role calling all the tasks with "dbs" and "postgres" in the tags section:
 
+```
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+        - {name: db-tier, tags: [dbs, postgres]}
+```
 
 License
 -------
@@ -35,4 +41,4 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Contact Mail: asalgado@redhat.com
