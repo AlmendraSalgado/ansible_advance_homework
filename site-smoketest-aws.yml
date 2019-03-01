@@ -3,7 +3,7 @@
   tasks:
   - name: Use Uri module for writing smoke test.
     uri:
-      url: "{{ inventory_hostname }}"
+      url: "http://{{ inventory_hostname }}"
     register: webpage
 
   - debug: var=webpage.stdout
