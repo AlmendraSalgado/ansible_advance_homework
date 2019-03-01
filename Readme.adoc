@@ -2,14 +2,41 @@
 
 == Executive Summary
 
-MitziCom has asked to provide a Proof of Concept using Red Hat Ansible Tower, Red Hat Ansible and Red Hat Openstack to determine the feasibility of using Ansible Tower as a CI/CD tool for automating continuous deployment of an internal three-tier application on QA and production environments.
+MitziCom has asked to provide a Proof of Concept using Red Hat Ansible Tower, Red Hat Ansible and Red Hat Openstack to determine the feasibility of using Ansible Tower
+as a CI/CD tool for automating continuous deployment of an internal three-tier application on QA and production environments.
 
 Several playbooks and roles were created to perform a full environment configuration, to setup Tower, Openstack and AWS, and to deploy the three tier app.
 
 == Deployment
 
+The next sections describe step-by-step how to use every main playbook in order to perform the initial Openstack configuration, the three tier app deployment and
+how to use everything in Tower.
+
+=== Repository
+
+To clone this repository:
+
+[source,bash]
+----
+git clone git@github.com:AlmendraSalgado/ansible_advance_homework.git
+cd ansible_advance_homework/
+----
+
 === Openstack - Workstation Setup
 
+When the environment is recently provide and it doesn't have any previous setup, the configuration to use Openstack should be done before everything else. Playbooks are
+provided to help you set up the SSH keys required to connect to the Red Hat OpenStack Platform (RHOSP) environment.
+
+Once, this repository is cloned, run the playbook site-setup-workstation.yml to provision the network, flavor, security groups and SSH keys.
+
+[source,bash]
+----
+OSP_GUID=<<Openstack GUID from mail>>
+ansible-playbook site-setup-workstation.yml -e OSP_GUID=${OSP_GUID} --private-key=/root/.ssh/mykey.pem -u <username-company.com>
+----
+
+The playbook will set up workstation-${OSP_GUID}.rhpds.opentlc.com as an isolated node and will set up opentstack.pem as a private key and openstack.pub as a public key
+for connection between the bastion and workstation hosts.
 
 === OSP Instance
 
