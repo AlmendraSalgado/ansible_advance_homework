@@ -44,6 +44,8 @@ Once the Openstack setup is done, the next sections can be execute to create or 
 
 This playbooks requires the previous inventory creation to use workstation. Because it will be use it in Tower, it doesn't have this previous requirement.
 
+Also, the playbooks will requires a variables called osp-servers which contains all the instance information. This variables is being used as a vars_files in every playbook.
+
 ==== Instance Creation
 
 To provision RHOSP instances to support the deployment of a three-tier app using the network details and flavor specified in the previous section the playbook
@@ -92,14 +94,25 @@ This playbook uses the following roles:
 
 To understand better what it does, follow the link to its README section.
 
+=== Smoke Tests
+
+Two Smoke Test were created to test the configuration done to OSP and AWS Instances. Using Tower, if the QA environment (OSP Instances) is working ok, a new AWS environment
+will be deployed and the same three tier app configuration will be done on it. This requires to create a Smoke Test for QA and a Smoke Test for Prod.
+
+The Smoke Tests point to the load balancer and if they obtains 'Ansible has done its job' the test will pass, otherwise it will fail.
+
+[source,bash]
+----
+OSP_GUID=<<Openstack GUID from mail>>
+ansible-playbook site-smoke-test.yml -e OSP_GUID=${OSP_GUID} --private-key=/root/.ssh/mykey.pem -u <username-company.com>
+----
+
 === Ansible Tower Config
 
-* From the cloned repo run `site-config-tower.yml` playbook to create job templates and workflow template.
+* From the cloned repository run `site-config-tower.yml` playbook to create job templates and workflow template.
 
-[source,text]
+[source,bash]
 ----
-[bastion]$ sudo -i
-[bastion]# cd ansible_advance_homework
 [bastion]# TOWER_GUID=<Ansible Tower Homework GUID from mail>
 [bastion]# OSP_GUID=<Openstack for Ansible GUID from mail>
 [bastion]# OPENTLC_LOGIN=<username-company.com>
@@ -111,9 +124,13 @@ To understand better what it does, follow the link to its README section.
 [bastion]# ansible-playbook site-config-tower.yml -e tower_GUID=${TOWER_GUID} -e osp_GUID=${OSP_GUID} -e opentlc_login=${OPENTLC_LOGIN} -e path_to_opentlc_key=/root/.ssh/mykey.pem -e param_repo_base=${JQ_REPO_BASE} -e opentlc_password=${OPENTLC_PASSWORD} -e REGION_NAME=${REGION} -e EMAIL=${RH_MAIL_ID} -e github_repo=${GITHUB_REPO}
 ----
 
+=== Ansible Tower Workflow
+
+Once, Tower was configured with the inventories, projects and templates, to execute the workflow in Tower just select the template cicd_workflow and launch it.
+
 === Anexo
 
-==== Playbooks Glosary
+==== Playbooks
 
 .List of Playbooks
 [%header,cols=2*]
