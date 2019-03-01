@@ -1,3 +1,7 @@
+= Engagement Journal - Ansible Advanced Homework
+
+== Executive Summary 
+
 ==== Ansible Tower Config
 
 
@@ -18,7 +22,6 @@
 [bastion]# ansible-playbook site-config-tower.yml -e tower_GUID=${TOWER_GUID} -e osp_GUID=${OSP_GUID} -e opentlc_login=${OPENTLC_LOGIN} -e path_to_opentlc_key=/root/.ssh/mykey.pem -e param_repo_base=${JQ_REPO_BASE} -e opentlc_password=${OPENTLC_PASSWORD} -e REGION_NAME=${REGION} -e EMAIL=${RH_MAIL_ID} -e github_repo=${GITHUB_REPO}
 ----
 
-
 .List of Playbooks
 [%header,cols=2*]
 |===
@@ -27,7 +30,7 @@
 | db-tier  | Install postgressql server for database role
 | lb-tier  | Install HA proxy role
 | base-config | Setup yum repo and base packages role
-| setup-workstation | Setup workstation, create network, ssh keypair, security group etc. role 
+| setup-workstation | Setup workstation, create network, ssh keypair, security group etc. role
 | osp-servers | Provision OSP Instances role
 | osp-instance-delete | Delete OSP Instances role
 | osp-facts | Genrate in-memory inventory for OSP instances role
