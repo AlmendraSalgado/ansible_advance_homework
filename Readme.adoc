@@ -1,9 +1,28 @@
 = Engagement Journal - Ansible Advanced Homework
 
-== Executive Summary 
+== Executive Summary
 
-==== Ansible Tower Config
+MitziCom has asked to provide a Proof of Concept using Red Hat Ansible Tower, Red Hat Ansible and Red Hat Openstack to determine the feasibility of using Ansible Tower as a CI/CD tool for automating continuous deployment of an internal three-tier application on QA and production environments.
 
+Several playbooks and roles were created to perform a full environment configuration, to setup Tower, Openstack and AWS, and to deploy the three tier app.
+
+== Deployment
+
+=== Openstack - Workstation Setup
+
+
+=== OSP Instance
+
+==== Instance Creation
+
+==== Instance Deletion
+
+==== Three tier app configuration
+
+
+
+
+=== Ansible Tower Config
 
 * From the cloned repo run `site-config-tower.yml` playbook to create job templates and workflow template.
 
@@ -21,6 +40,10 @@
 [bastion]# RH_MAIL_ID=<your mail id for dynamic inventory tag>
 [bastion]# ansible-playbook site-config-tower.yml -e tower_GUID=${TOWER_GUID} -e osp_GUID=${OSP_GUID} -e opentlc_login=${OPENTLC_LOGIN} -e path_to_opentlc_key=/root/.ssh/mykey.pem -e param_repo_base=${JQ_REPO_BASE} -e opentlc_password=${OPENTLC_PASSWORD} -e REGION_NAME=${REGION} -e EMAIL=${RH_MAIL_ID} -e github_repo=${GITHUB_REPO}
 ----
+
+=== Anexo
+
+==== Playbooks Glosary
 
 .List of Playbooks
 [%header,cols=2*]
