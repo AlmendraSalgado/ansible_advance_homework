@@ -13,6 +13,11 @@ Role Variables
 
 The role has the next default variables:
 
+| Defaults Variables | Description |
+| ------------- | ------------- |
+| TOMCAT_PACKAGES | Tomcat packages to install  |
+| APACHE_PACKAGES | Apache packages to install  |
+
 TOMCAT_PACKAGES - Tomcat packages to install
 
 APACHE_PACKAGES - Apache packages to install
