@@ -14,6 +14,7 @@ Role Variables
 The role has the next default variables:
 
 TOMCAT_PACKAGES - Tomcat packages to install
+
 APACHE_PACKAGES - Apache packages to install
 
 Dependencies
