@@ -40,14 +40,57 @@ for connection between the bastion and workstation hosts.
 
 === OSP Instance
 
+Once the Openstack setup is done, the next sections can be execute to create or delete instances and to perform some configurations and get a three tier app environment.
+
+This playbooks requires the previous inventory creation to use workstation. Because it will be use it in Tower, it doesn't have this previous requirement.
+
 ==== Instance Creation
+
+To provision RHOSP instances to support the deployment of a three-tier app using the network details and flavor specified in the previous section the playbook
+should be executed as follows:
+
+[source,bash]
+----
+OSP_GUID=<<Openstack GUID from mail>>
+ansible-playbook site-osp-instances.yml -e OSP_GUID=${OSP_GUID} --private-key=/root/.ssh/mykey.pem -u <username-company.com>
+----
+
+This playbook uses the role called link:https://github.com/AlmendraSalgado/ansible_advance_homework/tree/master/roles/osp-servers[osp-servers].
+To understand better what it does, follow the link to its README section.
 
 ==== Instance Deletion
 
+A playbook to destroy the QA environment on RHOSP was required. In the Tower workflow, a playbook will be exevuted previuosly to test if the environment
+was correctly deployed. If this test fails, the instances will be destroyed
+
+[source,bash]
+----
+OSP_GUID=<<Openstack GUID from mail>>
+ansible-playbook site-osp-delete.yml -e OSP_GUID=${OSP_GUID} --private-key=/root/.ssh/mykey.pem -u <username-company.com>
+----
+
+This playbook uses the role called https://github.com/AlmendraSalgado/ansible_advance_homework/tree/master/roles/osp-instance-delete[osp-instance-delete].
+To understand better what it does, follow the link to its README section.
+
 ==== Three tier app configuration
 
+The Three tier app configuration will setup 2 instances with webservices to expose through port 80, 1 load balancer which will be balancing the
+load between the previous 2 instances and 1 database. This configuration will be done by executing the following:
 
+[source,bash]
+----
+OSP_GUID=<<Openstack GUID from mail>>
+ansible-playbook site-3tier-app.yml -e OSP_GUID=${OSP_GUID} --private-key=/root/.ssh/mykey.pem -u <username-company.com>
+----
 
+This playbook uses the following roles:
+
+* https://github.com/AlmendraSalgado/ansible_advance_homework/tree/master/roles/osp-facts[osp-facts].
+* https://github.com/AlmendraSalgado/ansible_advance_homework/tree/master/roles/lb-tier[lb-tier].
+* https://github.com/AlmendraSalgado/ansible_advance_homework/tree/master/roles/app-tier[app-tier].
+* https://github.com/AlmendraSalgado/ansible_advance_homework/tree/master/roles/db-tier[db-tier].
+
+To understand better what it does, follow the link to its README section.
 
 === Ansible Tower Config
 
